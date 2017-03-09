@@ -1,0 +1,7 @@
+.control_buttons {
+    display: inline-block;
+}
+
+.done {
+    background: gray;
+}

@@ -26,11 +26,22 @@ const toggleClass = function(element, className) {
 
 //功能函数
 //定义 生成要插入的 html 的函数
-var templateTodo = function(todo) {
+var templateTodo = function(todo, done) {
+    //把 todo 内容，和完成状态的 class 一起写入
+    //默认未完成(设置完成状态的class名为空)
+    var status = ''
+    var describe = '未完成'
+    //如果 done 为 true，则说明这条 todo 是已完成状态
+    if (done) {
+        //就加上 'done' 这个 css
+        status = 'done'
+        //把描述改成'完成'
+        describe = '完成'
+    }
     var t = `
-            <div class="todos">
+            <div class="todos ${status}">
                 <span class="todo_content">${todo}</span>
-                <span class="state">未完成</span>
+                <span class="state">${describe}</span>
                 <div class="control_buttons">
                     <button class="button_done" type="button">完成</button>
                     <button class="button_delete" type="button">删除</button>
@@ -41,9 +52,9 @@ var templateTodo = function(todo) {
 }
 
 //定义 插入 todo 到页面中 的函数
-var insertTodo = function(todo) {
+var insertTodo = function(todo, done) {
     var container = document.querySelector('.container')
-    var t = templateTodo(todo)
+    var t = templateTodo(todo, done)
     container.innerHTML += t
 }
 
@@ -51,8 +62,8 @@ var insertTodo = function(todo) {
 var appendHtml = function() {
     var input = document.querySelector('.new_todo_input')
     var todo = input.value
-    //把 todo 插入到页面中
-    insertTodo(todo)
+    //把 todo 插入到页面中，并且把是否完成状态也传进去,默认是未完成
+    insertTodo(todo, false)
     //添加后，保存结果到 localStorage
     saveTodos()
 }
@@ -80,6 +91,8 @@ var operatingButtons = function(event) {
         } else {
             state.innerText = '未完成'
         }
+        //切换状态，保存状态结果到 localStorage
+        saveTodos()
     }
 }
 
@@ -103,8 +116,17 @@ var saveTodos = function() {
     //遍历获得所有 todo 项
     for (var i = 0; i < contents.length; i++) {
         var c = contents[i]
-        var t = c.innerHTML
-        todos.push(t)
+        // todo 项
+        var content = c.innerHTML
+        //完成状态(得到一个布尔值，父元素有'done'这个 class 就是 true(已完成))
+        var done = c.parentElement.classList.contains('done')
+        //保存 todo 和 完成状态
+        var todo = {
+            done: done,
+            content: c.innerHTML,
+        }
+        // var todo = c.innerHTML
+        todos.push(todo)
     }
     //用 save 保存到浏览器 localStorage 中
     save(todos)
@@ -118,7 +140,7 @@ var loadTodos = function() {
     for (var i = 0; i < todos.length; i++) {
         var todo = todos[i]
         //插入 todo 到页面中
-        insertTodo(todo)
+        insertTodo(todo.content, todo.done)
     }
 }
 

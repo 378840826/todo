@@ -5,3 +5,11 @@
 .done {
     background: gray;
 }
+
+.none {
+    display: none;
+}
+
+.active {
+    background: red;
+}

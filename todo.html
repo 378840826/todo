@@ -6,23 +6,28 @@
         <link rel="stylesheet" href="todo.css">
     </head>
     <body>
+        <!-- todo 包含的所有内容 -->
         <div class="all">
+            <!-- 欢迎 -->
             <div class="welcome">
                  <span>ToDo App</span>
                  <span>welcome</span>
             </div>
+            <!-- 添加 todo 组件 -->
             <div class="all_head_title">
                 <span>todo list</span>
                 <input class="new_todo_input" type="text" value="">
                 <button class="button_addtodo" type="button">add new todo</button>
             </div>
+            <!-- todo 列表不变的头部 -->
+            <div class="container_head">
+                <span class="span_title">待办事项</span>
+                <span class="span_title">状态</span>
+                <span class="span_title">操作</span>
+            </div>
+            <!-- 所有的 todo 和操作按钮 -->
             <div class="container">
-                <div class="container_head">
-                    <span class="span_title">待办事项</span>
-                    <span class="span_title">状态</span>
-                    <span class="span_title">操作</span>
-                </div>
-                <!-- <div class="todos">
+                <!-- <div class="todos" data-id=0>
                     <span class="todo_content">吃饭</span>
                     <span class="state">未完成</span>
                     <div class="control_buttons">
@@ -30,6 +35,14 @@
                         <button class="button_delete" type="button">删除</button>
                     </div>
                 </div> -->
+            </div>
+            <!-- 翻页 -->
+            <div class="page">
+                <button class="last_page">上一页</button>
+                <div class="pagination">
+                    <span class="page_1 page_number active">1</span>
+                </div>
+                <button class="next_page">下一页</button>
             </div>
         </div>
         <script src='todo.js'></script>

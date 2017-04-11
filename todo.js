@@ -153,11 +153,11 @@ var insertPagination = function() {
     //向 pagination 中添加页码
     var pagination = document.querySelector('.pagination')
     //第一页一直存在
-    pagination.innerHTML = '<span class="page_1 page_number active">1</span>'
+    pagination.innerHTML = '<button class="page_1 page_number active">1</button>'
     //第一页默认一直存在，从第二页开始
     for (var i = 2; i <= number; i++) {
         var t = `
-            <span class="page_${i} page_number">${i}</span>
+            <button class="page_${i} page_number">${i}</button>
         `
         pagination.innerHTML += t
     }
